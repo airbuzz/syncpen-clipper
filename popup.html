@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SyncPen Clipper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>SyncPen Clipper</h1>
+      </header>
+
+      <main>
+        <div class="status-section">
+          <div id="status" class="status disconnected">
+            <span class="status-dot"></span>
+            <span class="status-text">Not connected</span>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label for="apiKey">API Key</label>
+          <div class="input-group">
+            <input
+              type="password"
+              id="apiKey"
+              placeholder="sp_..."
+              autocomplete="off"
+            />
+            <button id="toggleVisibility" type="button" title="Toggle visibility">
+              👁️
+            </button>
+          </div>
+          <p class="help-text">
+            Get your API key from
+            <a href="https://syncpen.app/settings" target="_blank">SyncPen Settings</a>
+          </p>
+        </div>
+
+        <div class="button-group">
+          <button id="saveBtn" class="btn primary">Save</button>
+          <button id="clearBtn" class="btn secondary">Clear</button>
+        </div>
+
+        <div class="options-section">
+          <label class="checkbox-label">
+            <input type="checkbox" id="devMode" />
+            <span>Developer mode (localhost:3000)</span>
+          </label>
+        </div>
+
+        <div id="message" class="message hidden"></div>
+      </main>
+
+      <footer>
+        <p>Right-click to save content to your SyncPen Inbox</p>
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
