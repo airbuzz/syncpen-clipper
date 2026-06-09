@@ -58,8 +58,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     console.log("SyncPen Clipper: Sending clip to API...", { type: clipData.type });
     const response = await sendClipToSyncPen(clipData, apiKey);
     console.log("SyncPen Clipper: Clip saved successfully", response);
-    const clipCount = response.clipCount ?? 0;
-    showNotification("Success", `Clip saved! ${clipCount} clip${clipCount !== 1 ? "s" : ""} in Inbox`);
+    showNotification("Success", "Clip saved!");
   } catch (error) {
     console.error("SyncPen Clipper error:", error);
     showNotification("Error", error.message || "Failed to save clip.");
