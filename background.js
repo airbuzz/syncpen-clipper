@@ -1,7 +1,6 @@
 // SyncPen Clipper - Background Service Worker
 
 const API_BASE_URL = "https://www.syncpen.io";
-const DEV_API_BASE_URL = "http://localhost:3000";
 
 // Create context menus on install
 chrome.runtime.onInstalled.addListener(() => {
@@ -71,12 +70,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 async function getApiKey() {
   const result = await chrome.storage.sync.get(["apiKey"]);
   return result.apiKey || null;
-}
-
-// Get API base URL from storage (for dev mode)
-async function getApiBaseUrl() {
-  const result = await chrome.storage.sync.get(["devMode"]);
-  return result.devMode ? DEV_API_BASE_URL : API_BASE_URL;
 }
 
 // Capture selected text
@@ -200,7 +193,7 @@ async function capturePage(tab) {
 
 // Send clip to SyncPen API
 async function sendClipToSyncPen(clipData, apiKey) {
-  const baseUrl = await getApiBaseUrl();
+  const baseUrl = API_BASE_URL;
   const response = await fetch(`${baseUrl}/api/clipper/clip`, {
     method: "POST",
     headers: {
@@ -247,7 +240,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // Test API connection
 async function testConnection(apiKey) {
-  const baseUrl = await getApiBaseUrl();
+  const baseUrl = API_BASE_URL;
   const response = await fetch(`${baseUrl}/api/clipper/clip`, {
     method: "OPTIONS",
     headers: {

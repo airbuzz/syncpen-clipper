@@ -11,8 +11,7 @@
     "notifications"
   ],
   "host_permissions": [
-    "https://www.syncpen.io/*",
-    "http://localhost:3000/*"
+    "https://www.syncpen.io/*"
   ],
   "background": {
     "service_worker": "background.js"
