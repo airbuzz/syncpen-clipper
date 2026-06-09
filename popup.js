@@ -5,18 +5,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const toggleVisibilityBtn = document.getElementById("toggleVisibility");
   const saveBtn = document.getElementById("saveBtn");
   const clearBtn = document.getElementById("clearBtn");
-  const devModeCheckbox = document.getElementById("devMode");
   const statusEl = document.getElementById("status");
   const messageEl = document.getElementById("message");
 
   // Load saved settings
-  const settings = await chrome.storage.sync.get(["apiKey", "devMode"]);
+  const settings = await chrome.storage.sync.get(["apiKey"]);
   if (settings.apiKey) {
     apiKeyInput.value = settings.apiKey;
     updateStatus(true);
-  }
-  if (settings.devMode) {
-    devModeCheckbox.checked = true;
   }
 
   // Toggle password visibility
@@ -61,17 +57,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     apiKeyInput.value = "";
     updateStatus(false);
     showMessage("API key cleared", "success");
-  });
-
-  // Toggle dev mode
-  devModeCheckbox.addEventListener("change", async () => {
-    await chrome.storage.sync.set({ devMode: devModeCheckbox.checked });
-    showMessage(
-      devModeCheckbox.checked
-        ? "Dev mode enabled (localhost:3000)"
-        : "Dev mode disabled",
-      "success"
-    );
   });
 
   // Update connection status
